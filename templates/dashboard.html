@@ -50,15 +50,21 @@
     }
 
     .container {
-      max-width: 900px;
-      margin: 30px auto;
+      max-width: 1100px;
+      margin: 40px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .profile-card {
+      width: 100%;
+      max-width: 380px;
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     }
 
     .cover {
@@ -67,6 +73,7 @@
     }
 
     .profile-info {
+      text-align: center;
       padding: 20px;
       position: relative;
     }
@@ -79,6 +86,8 @@
       top: -60px;
       border: 4px solid white;
       background: #e5e7eb;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .profile-info h2 {
@@ -112,12 +121,38 @@
     }
 
     .card {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  text-align: center;
+}
+
+.card h4 {
+  margin-bottom: 8px;
+}
+
+.card button {
+  margin-top: 10px;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+    .section-title {
+  align-self: flex-start;
+  margin-bottom: 15px;
+}
+
+.suggestions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
   </style>
 </head>
 
