@@ -38,7 +38,7 @@ def profile():
 
 @app.route("/matches")
 def matches():
-    return "Matches Page"
+    return render_template("matches.html")
 
 @app.route("/chat")
 def chat():

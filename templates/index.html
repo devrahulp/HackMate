@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>HackMate | Find Your Hackathon Team</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="../static/css/style.css">
-=======
     <link rel="stylesheet" href="/static/css/style.css">
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
 </head>
 <body>
 
@@ -45,49 +42,44 @@
 <!-- ===== HOW IT WORKS ===== -->
 <section id="how" class="section">
     <h2>How HackMate Works</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
+    
     <div class="steps">
         <div class="step">
             <h3>1️⃣ Sign Up</h3>
-            <p>Secure authentication using Firebase.</p>
-        </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
+            <p>Secure authentication using Firebase.</p>
+            <button class="btn-primary" onclick="window.location.href='/signup'">
+                Sign Up
+            </button>
+        </div>
+
         <div class="step">
             <h3>2️⃣ Build Profile</h3>
             <p>Add skills, college, experience, and interests.</p>
+            <button class="btn-primary" onclick="window.location.href='/profile'">
+                Build Profile
         </div>
-<<<<<<< HEAD
 
         <!-- GET MATCHES BUTTON -->
         <div class="step">
             <h3>3️⃣ Get Matches</h3>
             <p>Smart recommendations based on profile data.</p>
-            <button class="btn-primary" onclick="goToMatches()">
+            <button class="btn-primary" onclick="window.location.href='/matches'">
                 Get Matches
             </button>
         </div>
 
-=======
-        <div class="step">
-            <h3>3️⃣ Get Matches</h3>
-            <p>Smart recommendations based on profile data.</p>
-        </div>
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
         <div class="step">
             <h3>4️⃣ Chat & Team Up</h3>
             <p>Send requests, chat, and form teams.</p>
+            <button class="btn-primary" onclick="openChat()">
+                Open Chat
+            </button>
         </div>
     </div>
 </section>
 
-<<<<<<< HEAD
 <script>
 function goToMatches() {
     window.location.href = "matches.html";
@@ -95,8 +87,6 @@ function goToMatches() {
 </script>
 
 
-=======
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
 <!-- ===== FEATURES ===== -->
 <section id="features" class="section light-bg">
     <h2>Features</h2>
@@ -110,71 +100,11 @@ function goToMatches() {
     </div>
 </section>
 
-=======
 
-    <div class="steps-buttons">
-
-    
-            <button class="how-btn">
-                <a href="/signup"></a>
-                1️⃣ Sign Up
-                <span>Secure authentication using Firebase</span>
-            </button>
-        </a>
-
-        <a href="/profile">
-            <button class="how-btn">
-                2️⃣ Build Profile
-                <span>Add skills, college, experience, and interests</span>
-            </button>
-        </a>
-
-        <a href="/matches">
-            <button class="how-btn">
-                3️⃣ Get Matches
-                <span>Smart recommendations based on profile data</span>
-            </button>
-        </a>
-
-        <div class="step">
-    <h3>4️⃣ Chat & Team Up</h3>
-    <p>Send requests, chat, and form teams.</p>
-
-    <button class="chat-btn" onclick="window.location.href='/chat'">
-        Open Chat
-    </button>
-</div>
-
-    </div>
-</section>
->>>>>>> e74d6b30db1fc0ad185099bc1045dc923c746196
 <!-- ===== SAMPLE PROFILES ===== -->
 <section class="section">
     <h2>Meet Potential Teammates</h2>
-<<<<<<< HEAD
-    <div class="profiles">
-        <div class="profile-card">
-            <img src="https://i.pravatar.cc/150?img=3">
-            <h3>Aryan</h3>
-            <p>Skills: Python, ML</p>
-            <button class="btn-primary">View Profile</button>
-        </div>
-        <div class="profile-card">
-            <img src="https://i.pravatar.cc/150?img=5">
-            <h3>Sneha</h3>
-            <p>Skills: Frontend, UI/UX</p>
-            <button class="btn-primary">View Profile</button>
-        </div>
-        <div class="profile-card">
-            <img src="https://i.pravatar.cc/150?img=8">
-            <h3>Rahul</h3>
-            <p>Skills: Backend, Flask</p>
-            <button class="btn-primary">View Profile</button>
-        </div>
-    </div>
-=======
     <div class="profiles" id="profilesContainer"></div>
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
 </section>
 
 <!-- ===== CTA ===== -->
@@ -209,10 +139,6 @@ function goToMatches() {
     <p class="copyright">© 2025 HackMate</p>
 </footer>
 
-<<<<<<< HEAD
-<script src="js/main.js"></script>
-=======
 <script src="/static/js/main.js"></script>
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
 </body>
 </html>
