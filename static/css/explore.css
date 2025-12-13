@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 40px;
+}
+
+.explore-btn {
+    padding: 12px 24px;
+    border: 2px solid #333;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.explore-btn:hover {
+    background: #333;
+    color: white;
+}
+
+#profilesContainer {
+    margin-top: 30px;
+}
+
+.profile-card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    width: 250px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
