@@ -1,0 +1,1 @@
+console.log("HackMate Home Loaded");
