@@ -28,6 +28,23 @@ def login_page():
 def dashboard_page():
     return render_template('dashboard.html')
 
+@app.route("/signup")
+def signup():
+    return "Signup Page"
+
+@app.route("/profile")
+def profile():
+    return "Profile Page"
+
+@app.route("/matches")
+def matches():
+    return "Matches Page"
+
+@app.route("/chat")
+def chat():
+    return render_template("chat.html")
+
+
 @app.route('/api/save_user', methods=['POST'])
 def save_user():
     auth_header = request.headers.get('Authorization', None)

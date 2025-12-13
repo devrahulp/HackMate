@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <meta charset="UTF-8">
 <title>HackMate Chat</title>
 
@@ -226,3 +227,60 @@ function sendMessage() {
 
 </body>
 </html>
+=======
+    <meta charset="UTF-8">
+    <title>HackMate | Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+
+<div class="chat-app">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Chats</h2>
+        </div>
+
+        <div class="chat-list">
+            <div class="chat-user active" onclick="openConversation('Aryan')">
+                <img src="https://i.pravatar.cc/40?img=3">
+                <div>
+                    <h4>Aryan</h4>
+                    <p>ML Developer</p>
+                </div>
+            </div>
+
+            <div class="chat-user" onclick="openConversation('Sneha')">
+                <img src="https://i.pravatar.cc/40?img=5">
+                <div>
+                    <h4>Sneha</h4>
+                    <p>Frontend</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHAT AREA -->
+    <div class="chat-area">
+
+        <div class="chat-header">
+            <img src="https://i.pravatar.cc/40?img=3">
+            <h3 id="chatUser">Select a chat</h3>
+        </div>
+
+        <div class="chat-messages" id="messages"></div>
+
+        <div class="chat-input">
+            <input type="text" id="messageInput" placeholder="Message...">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
+>>>>>>> e74d6b30db1fc0ad185099bc1045dc923c746196

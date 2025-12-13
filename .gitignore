@@ -1,9 +1,14 @@
 node_modules/
 serviceAccoutKey.json
 <<<<<<< HEAD
+<<<<<<< HEAD
 __pycache__/serviceAccountKey.json
 =======
 __pycache__/
 serviceAccountKey.json
 /static/js/firebase.js
 >>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
+=======
+__pycache__/
+serviceAccountKey.json
+>>>>>>> e74d6b30db1fc0ad185099bc1045dc923c746196
