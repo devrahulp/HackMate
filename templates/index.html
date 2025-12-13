@@ -41,25 +41,40 @@
 <!-- ===== HOW IT WORKS ===== -->
 <section id="how" class="section">
     <h2>How HackMate Works</h2>
+
     <div class="steps">
         <div class="step">
             <h3>1️⃣ Sign Up</h3>
             <p>Secure authentication using Firebase.</p>
         </div>
+
         <div class="step">
             <h3>2️⃣ Build Profile</h3>
             <p>Add skills, college, experience, and interests.</p>
         </div>
+
+        <!-- GET MATCHES BUTTON -->
         <div class="step">
             <h3>3️⃣ Get Matches</h3>
             <p>Smart recommendations based on profile data.</p>
+            <button class="btn-primary" onclick="goToMatches()">
+                Get Matches
+            </button>
         </div>
+
         <div class="step">
             <h3>4️⃣ Chat & Team Up</h3>
             <p>Send requests, chat, and form teams.</p>
         </div>
     </div>
 </section>
+
+<script>
+function goToMatches() {
+    window.location.href = "matches.html";
+}
+</script>
+
 
 <!-- ===== FEATURES ===== -->
 <section id="features" class="section light-bg">
