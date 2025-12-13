@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Signup - HackMate</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/signup.css">
+</head>
+<body>
+
+  <div class="card">
+    <h2>Create account</h2>
+    <input id="name" placeholder="Full name">
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button id="signupBtn">Sign up</button>
+    <p>Already have an account? <a href="/login">Login</a></p>
+  </div>
+
+  <!-- 1️⃣ Firebase SDKs MUST COME FIRST -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <!-- 2️⃣ Firebase config -->
+  <script src="/static/js/firebase.js"></script>
+
+  <!-- 3️⃣ Auth functions -->
+  <script src="/static/js/auth.js"></script>
+
+  <!-- 4️⃣ Page logic -->
+  <script>
+    document.getElementById("signupBtn").addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      signup(email, password, name);
+    });
+
+    onAuthState(user => {
+      if (user) window.location = "/dashboard.html";
+    });
+  </script>
+
+</body>
+</html>

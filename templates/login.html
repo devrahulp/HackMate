@@ -1,0 +1,46 @@
+<!-- templates/login.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login - HackMate</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/login.css">
+
+</head>
+<body>
+
+  <div class="card">
+    <h2>Login</h2>
+    <input id="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
+    <button id="loginBtn">Log in</button>
+    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+  </div>
+
+  <!-- 1️⃣ Firebase SDKs MUST load first -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+  <!-- 2️⃣ Then your Firebase config -->
+  <script src="/static/js/firebase.js"></script>
+
+  <!-- 3️⃣ Then your auth logic -->
+  <script src="/static/js/auth.js"></script>
+
+  <!-- 4️⃣ Finally the page-specific JavaScript -->
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', () => {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      login(email, password);
+    });
+
+    // If logged in, redirect to dashboard
+    onAuthState(user => {
+      if (user) window.location = '/dashboard';
+    });
+  </script>
+
+</body>
+</html>

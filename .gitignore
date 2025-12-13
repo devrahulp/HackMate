@@ -1,0 +1,5 @@
+node_modules/
+serviceAccoutKey.json
+__pycache__/
+serviceAccountKey.json
+/static/js/firebase.js
