@@ -72,8 +72,6 @@ def save_user():
     )
     return jsonify({'ok': True, 'uid': uid})
 
-<<<<<<< HEAD
-=======
 @app.route("/api/profiles", methods=["GET"])
 def get_profiles():
     # OPTIONAL: verify Firebase token if you want only logged-in users
@@ -87,7 +85,6 @@ def get_profiles():
     profiles = list(users)
     return jsonify(profiles)
 
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
 if __name__ == '__main__':
     # For development only
     app.run(debug=True, host='0.0.0.0', port=5000)

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-console.log("HackMate Home Loaded");
-=======
 async function loadProfiles() {
     try {
         const res = await fetch("/api/profiles");
@@ -42,11 +38,8 @@ function viewProfile(uid) {
 }
 
 document.addEventListener("DOMContentLoaded", loadProfiles);
->>>>>>> d704920af0694b0bc13572e0b351b8c3399ccc6d
-=======
-alert("main.js loaded");
-console.log("HackMate Home Loaded");
+
 function openChat() {
     window.location.href = "/chat";
 }
->>>>>>> e74d6b30db1fc0ad185099bc1045dc923c746196
+
