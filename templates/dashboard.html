@@ -1,58 +1,255 @@
-<!-- templates/dashboard.html -->
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>Dashboard - HackMate</title>
+
   <link rel="stylesheet" href="/static/css/style.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f2ef;
+    }
+
+    .header {
+      background: white;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      color: #4f46e5;
+      margin: 0;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #logoutBtn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .cover {
+      height: 160px;
+      background: linear-gradient(90deg,#4f46e5,#6366f1);
+    }
+
+    .profile-info {
+      padding: 20px;
+      position: relative;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      position: absolute;
+      top: -60px;
+      border: 4px solid white;
+      background: #e5e7eb;
+    }
+
+    .profile-info h2 {
+      margin-top: 70px;
+    }
+
+    .email {
+      color: gray;
+    }
+
+    .actions {
+      margin-top: 15px;
+    }
+
+    .primary-btn {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .secondary-btn {
+      border: 1px solid #4f46e5;
+      background: white;
+      color: #4f46e5;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
+
 <body>
 
-  <div class="header">
-    <h1>HackMate Dashboard</h1>
+<!-- HEADER -->
+<div class="header">
+  <h1>HackMate</h1>
+  <div class="header-right">
+    <button class="icon-btn" onclick="window.location='/requests'">👥 Requests</button>
+    <button class="icon-btn" onclick="loadNotifications()">🔔 Notifications</button>
     <button id="logoutBtn">Logout</button>
   </div>
+</div>
 
-  <div class="container">
-    <h3>Welcome, <span id="displayName"></span></h3>
-    <pre id="profile"></pre>
+<div class="container">
+
+  <!-- PROFILE -->
+  <div class="profile-card">
+    <div class="cover"></div>
+
+    <div class="profile-info">
+      <img id="avatar" class="avatar">
+
+      <h2 id="displayName"></h2>
+      <p class="email" id="email"></p>
+
+      <p id="college"></p>
+      <p id="city"></p>
+      <p id="skills"></p>
+      <p id="languages"></p>
+      <p id="experience"></p>
+      <p id="domains"></p>
+      <p id="themes"></p>
+      <p id="mode"></p>
+      <p id="wins"></p>
+
+      <div class="actions">
+        <button class="primary-btn" onclick="window.location='/edit-profile'">Edit Profile</button>
+        <button class="secondary-btn">Open to Hackathons</button>
+      </div>
+    </div>
   </div>
-<!-- Firebase SDKs -->
+
+  <!-- SUGGESTIONS -->
+  <h3>Suggested Teammates</h3>
+  <div id="suggestions"></div>
+
+</div>
+
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-
-<!-- Firebase config -->
 <script src="/static/js/firebase.js"></script>
-
-<!-- Auth functions -->
 <script src="/static/js/auth.js"></script>
 
-<!-- Page-specific JS -->
 <script>
-    onAuthState(async (user) => {
-      if (!user) {
-        window.location = "/login";
-        return;
-      }
+onAuthState(async (user) => {
+  if (!user) {
+    window.location = "/login";
+    return;
+  }
 
-      document.getElementById("displayName").innerText =
-        user.displayName || user.email;
+  // Firebase basic info
+  displayName.innerText = user.displayName || "HackMate User";
+  email.innerText = user.email;
+  avatar.src = user.photoURL || "https://via.placeholder.com/120";
 
-      document.getElementById("profile").innerText = JSON.stringify(
-        {
-          uid: user.uid,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          metadata: user.metadata
-        },
-        null,
-        2
-      );
-    });
+  // Load profile from MongoDB
+  const token = await user.getIdToken();
+  const res = await fetch("/api/profile", {
+    headers: { Authorization: token }
+  });
+  const profile = await res.json();
 
-    document.getElementById("logoutBtn").addEventListener("click", logout);
+  college.innerText = profile.college ? `🎓 ${profile.college}` : "";
+  city.innerText = profile.city ? `📍 ${profile.city}` : "";
+  skills.innerText = profile.skills ? `🛠 Skills: ${profile.skills.join(", ")}` : "";
+  languages.innerText = profile.languages ? `💻 Languages: ${profile.languages.join(", ")}` : "";
+  experience.innerText = profile.experience ? `📄 ${profile.experience}` : "";
+  domains.innerText = profile.domains ? `🔍 Domains: ${profile.domains}` : "";
+  themes.innerText = profile.themes ? `🎯 Themes: ${profile.themes}` : "";
+  mode.innerText = profile.mode ? `🧑‍💻 Mode: ${profile.mode}` : "";
+  wins.innerText = profile.hackathonsWon ? `🏆 Hackathons Won: ${profile.hackathonsWon}` : "";
+
+  loadSuggestions();
+});
+
+/* LOGOUT */
+logoutBtn.onclick = logout;
+
+/* NOTIFICATIONS */
+async function loadNotifications() {
+  const token = await auth.currentUser.getIdToken();
+  const res = await fetch("/api/notifications", {
+    headers: { Authorization: token }
+  });
+  const notes = await res.json();
+  alert(notes.length ? notes.map(n => n.text).join("\n") : "No notifications");
+}
+
+/* SUGGESTIONS */
+async function loadSuggestions() {
+  const token = await auth.currentUser.getIdToken();
+  const res = await fetch("/api/suggestions", {
+    headers: { Authorization: token }
+  });
+  const data = await res.json();
+
+  suggestions.innerHTML = data.map(u => `
+    <div class="card">
+      <h4>${u.name || "User"}</h4>
+      <p>${(u.skills || []).join(", ")}</p>
+      <button onclick="sendRequest('${u.uid}')">Send Request</button>
+    </div>
+  `).join("");
+}
+
+/* SEND REQUEST */
+async function sendRequest(uid) {
+  const token = await auth.currentUser.getIdToken();
+  await fetch("/api/send-request", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify({ to: uid })
+  });
+  alert("Request sent!");
+}
 </script>
-
 
 </body>
 </html>

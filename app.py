@@ -1,8 +1,10 @@
 # app.py
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,session
 from pymongo import MongoClient
 from utils.verify_token import verify_id_token
 import os
+from firebase_admin import auth
+from utils.db import users, requests, notifications
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
@@ -12,6 +14,44 @@ client = MongoClient(mongo_uri)
 db = client['hackmate_db']
 users_col = db['users']
 
+
+
+@app.route("/api/notifications")
+def notifications():
+    token = request.headers.get("Authorization")
+    user = auth.verify_id_token(token)
+
+    notes = notifications.find({"uid": user["uid"]})
+    return jsonify(list(notes))
+@app.route("/requests")
+def requests_page():
+    return render_template("requests.html")
+@app.route("/api/suggestions")
+def suggestions():
+    token = request.headers.get("Authorization")
+    user = auth.verify_id_token(token)
+
+    profiles = users.find({"uid": {"$ne": user["uid"]}})
+    return jsonify(list(profiles))
+
+
+
+@app.route("/api/save-profile", methods=["POST"])
+def save_profile():
+    token = request.headers.get("Authorization")
+    user = verify_firebase_token(token)
+
+    data = request.json
+    data["uid"] = user["uid"]
+    data["email"] = user["email"]
+
+    users.update_one(
+        {"uid": user["uid"]},
+        {"$set": data},
+        upsert=True
+    )
+
+    return jsonify({"status": "success"})
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -24,9 +64,13 @@ def signup_page():
 def login_page():
     return render_template('login.html')
 
-@app.route('/dashboard')
-def dashboard_page():
-    return render_template('dashboard.html')
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/edit-profile")
+def edit_profile():
+    return render_template("edit_profile.html")
 
 @app.route("/signup")
 def signup():
@@ -72,18 +116,17 @@ def save_user():
     )
     return jsonify({'ok': True, 'uid': uid})
 
-@app.route("/api/profiles", methods=["GET"])
-def get_profiles():
-    # OPTIONAL: verify Firebase token if you want only logged-in users
-    # decoded = verify_id_token(token)
+@app.route("/api/profile")
+def get_profile():
+    token = request.headers.get("Authorization")
+    user = verify_firebase_token(token)
 
-    users = users_col.find(
-        {},  # get all users
-        {"_id": 0, "uid": 1, "name": 1, "skills": 1, "profile_pic_url": 1}
+    profile = users.find_one(
+        {"uid": user["uid"]},
+        {"_id": 0}  # remove Mongo _id
     )
 
-    profiles = list(users)
-    return jsonify(profiles)
+    return jsonify(profile or {})
 
 if __name__ == '__main__':
     # For development only
